@@ -1,6 +1,7 @@
 package kz.kd.hw_116
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 private const val code_key = "COUNTER"
 
 class MainActivity : AppCompatActivity() {
-    private val numbers: MutableList<Int> = mutableListOf(0)
+    private val numbers: MutableList<Int> = mutableListOf()
     lateinit var code: TextView
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -93,7 +94,10 @@ class MainActivity : AppCompatActivity() {
         val ok: Button = findViewById(R.id.button_ok)
         ok.setOnClickListener {
             if (numbers.size == 4 && code.text.equals("1567")) {
+                code.setTextColor(Color.parseColor("#17DB5A"))
                 Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this,SecondActivity::class.java)
+                startActivity(intent)
             } else {
                 code.setTextColor(Color.parseColor("#F91717"))
                 Toast.makeText(this, "Wrong PIN!", Toast.LENGTH_SHORT).show()
